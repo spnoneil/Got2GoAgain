@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
 
+id 'com.google.secrets_gradle_plugin' version '0.5'
+
 import com.android.build.OutputFile
 
 /**

@@ -61,3 +61,5 @@ buck-out/
 
 .env
 /.expo
+.expo/settings.json
+.expo/packager-info.json
