@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen'
 import DetailsScreen from './src/screens/DetailsScreen'
+import AddBathroom from './src/screens/AddBathroom'
 
 const Stack = createStackNavigator();
 
@@ -21,9 +22,16 @@ function App() {
           component={DetailsScreen} 
           options={{ title: 'Bathroom Detail' }}
         />
+        <Stack.Screen
+          name="AddBathroom"
+          component={AddBathroom}
+          options={{ title: 'Add a Bathroom!'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+
 
 export default App;
