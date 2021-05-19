@@ -6,11 +6,11 @@ import Map from './../components/Map'
 function HomeScreen({navigation}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home</Text>
+      <Text>Home stuff</Text>
       <Map />
       <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+        title="Add a Bathroom"
+        onPress={() => navigation.navigate('AddBathroom')}
       />
     </View>
   );
