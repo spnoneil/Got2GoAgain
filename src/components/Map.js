@@ -1,10 +1,14 @@
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import React, {Component, useState} from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import useLocation from './Location'
 import Viewport from './Viewport';
+import PortMapApiAsync from './../api/PortMapAPI'
 
 function Map() {
+
+  const markers =  PortMapApiAsync() ;
+  console.log(markers.id);
 
   // const location = useLocation();
   const initialRegion = {
@@ -24,9 +28,10 @@ function Map() {
         <Marker draggable
         coordinate={initialRegion}
         image={require('./../assets/marker.png')}
-        // onDragEnd={(e) => this.setState({ x: e.nativeEvent.coordinate })}
+        onMarkerDragEnd={(e) => {this.setState(e.nativeEvent.coordinate) }}
+        onPress={() => {<Button title='I A BUTTON'/>}}
         />
-        <Marker coordinate={{ latitude: 51.5078788, longitude: -0.0877321 }} />
+        {/* <Marker coordinate={{ latitude: 51.5078788, longitude: -0.0877321 }} /> */}
       </MapView>
     // </Viewport>
   );
