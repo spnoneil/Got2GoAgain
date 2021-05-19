@@ -7,6 +7,11 @@ import Viewport from './Viewport';
 function Map() {
 
   // const location = useLocation();
+  const initialRegion = {
+    latitude: 45.50527180254351,
+    longitude: -122.67506901733977,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421}
 
   return(
     // <Viewport>
@@ -14,17 +19,13 @@ function Map() {
         style={{height: `50%`, width: `100%`}}
         provider={PROVIDER_GOOGLE}
         showsUserLocation
-        // initialRegion={{
-        // latitude: 45.50527180254351,
-        // longitude: -122.67506901733977,
-        // latitudeDelta: 0.0922,
-        // longitudeDelta: 0.0421}}
+        initialRegion={initialRegion}
       >
-        {/* <Marker draggable
-        // coordinate={initialRegion}
+        <Marker draggable
+        coordinate={initialRegion}
         image={require('./../assets/marker.png')}
         // onDragEnd={(e) => this.setState({ x: e.nativeEvent.coordinate })}
-        /> */}
+        />
         <Marker coordinate={{ latitude: 51.5078788, longitude: -0.0877321 }} />
       </MapView>
     // </Viewport>
