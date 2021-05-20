@@ -12,10 +12,11 @@ import React from 'react';
 const PortMapApiAsync = async () => {
   try {
     const response = await axios.get(
-      'www.refugerestrooms.org/api/v1/restrooms/by_location?lat=45.50527180254351&lng=-122.67506901733977',
+      'http://www.refugerestrooms.org/api/v1/restrooms/by_location?lat=45.50527180254351&lng=-122.67506901733977',
     );
-    console.log(response);
-    return (JSON.stringify(response.data));
+    // console.log("responsedata= " + JSON.stringify(response.data))
+    // return (JSON.stringify(response.data));
+    return (response.data);
   } catch (error) {
     // handle error
     console.log("This is error: " + error.message);

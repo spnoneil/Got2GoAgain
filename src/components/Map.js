@@ -1,36 +1,65 @@
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import useLocation from './Location'
 import Viewport from './Viewport';
 import PortMapApiAsync from './../api/PortMapAPI'
+import axios from 'axios';
+import ApiHelper from './../api/ApiHelper';
 
 function Map() {
+  // const [markers, setMarkers] = useState("")
+  const location = useLocation();
 
-  const markers =  PortMapApiAsync() ;
-  console.log(markers.id);
-
-  // const location = useLocation();
-  const initialRegion = {
+  // const { data, error, request } = ApiHelper(getApiData)
+// console.log(data)
+  const [region, setRegion] = useState({
     latitude: 45.50527180254351,
     longitude: -122.67506901733977,
     latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421}
+    longitudeDelta: 0.0421})
+    
+  const getApiData = async () => {
+    const markerArray = await PortMapApiAsync();
+    // console.log(markerArray)
+    console.log("log: ", markerArray[0].name)
+    return markerArray;
+  }
+  // const apiData = getApiData();
+// console.log(apiData)
 
+  useEffect(() => {
+    getApiData();
+  }, [location])
+
+// console.log("HERE: ", apiEffect)
   return(
     // <Viewport>
       <MapView
         style={{height: `50%`, width: `100%`}}
         provider={PROVIDER_GOOGLE}
         showsUserLocation
-        initialRegion={initialRegion}
+        region={region}
+        onRegionChangeComplete={region => setRegion(region)}
+        // initialRegion={initialRegion}
       >
         <Marker draggable
-        coordinate={initialRegion}
+        coordinate={{latitude: 45.50527180254351, longitude: -122.67506901733977}}
         image={require('./../assets/marker.png')}
         onMarkerDragEnd={(e) => {this.setState(e.nativeEvent.coordinate) }}
         onPress={() => {<Button title='I A BUTTON'/>}}
         />
+        {/* {markerArray[0] != null && markerArray.map((marker, index) => (
+            <MapView.Marker
+                key = {index}
+                coordinate = {{
+                    latitude: marker.latitude,
+                    longitude: marker.longitude
+                }}
+                title = { marker.name }
+            />
+              ))
+              } */}
         {/* <Marker coordinate={{ latitude: 51.5078788, longitude: -0.0877321 }} /> */}
       </MapView>
     // </Viewport>
