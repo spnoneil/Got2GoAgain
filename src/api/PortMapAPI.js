@@ -24,3 +24,5 @@ const PortMapApiAsync = async () => {
 };
 
 export default PortMapApiAsync;
+
+// `http://www.refugerestrooms.org/api/v1/restrooms/by_location?lat=${location.latitude}&lng=${location.longitude}`,

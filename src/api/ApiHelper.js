@@ -4,8 +4,8 @@ export default ApiHelper = (apiData) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(false);
 
-  const request = async (...args) => {
-    const response = await apiData(...args);
+  const request = async () => {
+    const response = await apiData();
     if (!response.ok) {
       return setError(true)
     }
