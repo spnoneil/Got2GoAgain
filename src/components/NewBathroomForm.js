@@ -1,25 +1,33 @@
 import React from 'react';
-import { Button, TextInput, View } from 'react-native';
+import { Button, TextInput, View, StyleSheet, Text } from 'react-native';
 import { Formik } from 'formik';
 
-export const NewBathroomForm = props => (
+const NewBathroomForm = props => (
   <Formik
+    style= {{flex: 1, justifyContent: "center"}}
     initialValues={{ email: '', cost: '', rating: '' }}
     onSubmit={values => console.log(values)}
   >
     {({ handleChange, handleBlur, handleSubmit, values }) => (
       <View>
+
+        <Text style={styling.text}>Address:</Text>
         <TextInput
+          style={styling.input}
           onChangeText={handleChange('address')}
           onBlur={handleBlur('address')}
           value={values.address}
         />
+        <Text style={styling.text}>Free/Not Free:</Text>
         <TextInput
+          style={styling.input}
           onChangeText={handleChange('cost')}
           onBlur={handleBlur('cost')}
           value={values.cost}
         />
+        <Text style={styling.text}>Rating:</Text>
         <TextInput
+          style={styling.input}
           onChangeText={handleChange('rating')}
           onBlur={handleBlur('rating')}
           value={values.rating}
@@ -29,3 +37,17 @@ export const NewBathroomForm = props => (
     )}
   </Formik>
 );
+
+const styling = StyleSheet.create({
+  input: {
+    borderWidth: 1,
+    borderColor: 'purple',
+    marginBottom: 5,
+    width: 150,
+  },
+  text: {
+    fontSize: 15,
+  }
+})
+
+export default NewBathroomForm;
