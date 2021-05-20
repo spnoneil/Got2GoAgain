@@ -10,8 +10,13 @@ import ApiHelper from './../api/ApiHelper';
 function Map() {
   // const [markers, setMarkers] = useState("")
   const location = useLocation();
+  const { data: marker, error, request: loadMarkers } = ApiHelper(getApiData)
 
-  // const { data, error, request } = ApiHelper(getApiData)
+  const reloadLocation = async (location) => {
+    const resolvedLocation = await location;
+    loadMarkers(resolvedLocation);
+  }
+  // console.log("marker: ", marker[0])
 // console.log(data)
   const [region, setRegion] = useState({
     latitude: 45.50527180254351,
@@ -25,12 +30,20 @@ function Map() {
     console.log("log: ", markerArray[0].name)
     return markerArray;
   }
+  console.log(getApiData())
   // const apiData = getApiData();
 // console.log(apiData)
+// const apiData = PortMapApiAsync();
 
-  useEffect(() => {
-    getApiData();
-  }, [location])
+useEffect(() => {
+  reloadLocation(location);
+}, [location]);
+
+  // useEffect(() => {
+  //   getApiData();
+  // }, [location])
+
+
 
 // console.log("HERE: ", apiEffect)
   return(
@@ -43,12 +56,20 @@ function Map() {
         onRegionChangeComplete={region => setRegion(region)}
         // initialRegion={initialRegion}
       >
+        {location === !null ? (
+        <Marker 
+          coordinate={{
+          latitude: location.latitude,
+          longitude: location.longitude
+        }} />
+        ) : null }
         <Marker draggable
         coordinate={{latitude: 45.50527180254351, longitude: -122.67506901733977}}
         image={require('./../assets/marker.png')}
         onMarkerDragEnd={(e) => {this.setState(e.nativeEvent.coordinate) }}
         onPress={() => {<Button title='I A BUTTON'/>}}
         />
+        
         {/* {markerArray[0] != null && markerArray.map((marker, index) => (
             <MapView.Marker
                 key = {index}

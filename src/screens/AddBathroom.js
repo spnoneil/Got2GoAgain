@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import NewBathroomForm from './../components/NewBathroomForm';
+import { color } from 'react-native-reanimated';
 
 function AddBathroom() {
   return (
@@ -19,12 +20,14 @@ const styling = StyleSheet.create({
   text: {
     marginBottom: 30,
     fontSize: 40,
-    fontFamily: 'monospace'
+    fontFamily: 'monospace',
+    color: '#B119B6'
   },
   image: {
     flex: 1,
     resizeMode: "cover",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: 'rgba(0,0,0,0.1)',
   }
 })
 
