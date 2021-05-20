@@ -5,16 +5,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './src/screens/HomeScreen'
 import DetailsScreen from './src/screens/DetailsScreen'
 import AddBathroom from './src/screens/AddBathroom'
+import About from './src/screens/About'
 
 const Stack = createStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer style={{}}>
       <Stack.Navigator>
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
+          style={{backgroundColor: 'purple'}}
           options={{ title: 'Got2Go' }}
         />
         <Stack.Screen 
@@ -26,6 +28,11 @@ function App() {
           name="AddBathroom"
           component={AddBathroom}
           options={{ title: 'Add a Bathroom!'}}
+        />
+          <Stack.Screen
+          name="About"
+          component={About}
+          options={{ title: 'About'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
