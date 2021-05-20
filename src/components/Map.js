@@ -1,14 +1,17 @@
 import MapView, { PROVIDER_GOOGLE, Marker, Callout } from 'react-native-maps';
 import React, {Component, useState, useEffect} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import useLocation from './Location'
 import Viewport from './Viewport';
 import PortMapApiAsync from './../api/PortMapAPI'
 import axios from 'axios';
 import ApiHelper from './../api/ApiHelper';
+import { useNavigation } from '@react-navigation/native';
+import mapStyle from './../assets/googlemap'
 
 function Map() {
   const [markers, setMarkers] = useState([])
+  const navigation = useNavigation();
   // const { data: marker, error, request: loadMarkers } = ApiHelper(getApiData)
   // console.log(markers)
   const location = useLocation();
@@ -18,7 +21,6 @@ function Map() {
     // loadMarkers(resolvedLocation);
   }
   // console.log("reload: ", reloadLocation())
-  // console.log("marker: ", marker[0])
 // console.log(data)
   const [region, setRegion] = useState({
     latitude: 45.50527180254351,
@@ -46,17 +48,31 @@ function Map() {
     setMarkers(response);
   })
   }, [location])
-
-
+  // useEffect(() => {
+  //   setMarkers
+  // })
+  // TODO: FIX IMAGE SWITCH
+// function markerImg(mark) {
+//   return (mark != false ? require('./../assets/nong.png') : require('./../assets/g.png'))
+// }
 
   return(
       <MapView
-        style={{height: `50%`, width: `100%`}}
+        customMapStyle={mapStyle}
+        style={styling.map}
         provider={PROVIDER_GOOGLE}
         showsUserLocation
         region={region}
         onRegionChangeComplete={region => setRegion(region)}
         // initialRegion={initialRegion}
+        // onPress={(location) => { 
+        //   <Marker        
+        //     coordinate={{
+        //       latitude: location.latitude,
+        //       longitude: location.longitude,
+        //     }}
+        //   />
+        //     }
       >
         {location === !null ? (
         <Marker 
@@ -78,14 +94,19 @@ function Map() {
           )
         ) : null } */}
         <Marker draggable
-        coordinate={{latitude: 45.50527180254351, longitude: -122.67506901733977}}
+        coordinate = {{
+          latitude: 45.5007,
+          longitude: -122.6774,
+        }}
         image={require('./../assets/marker.png')}
+        // TODO: FIX MARKER DRAG
         onMarkerDragEnd={(e) => {this.setState(e.nativeEvent.coordinate) }}
         onPress={() => {<Button title='I A BUTTON'/>}}
         />
         
         {markers[0] != null && markers.map((marker, index) => (
             <MapView.Marker
+              // image={markerImg(marker.unisex)}
               key = {index}
               coordinate = {{
                 latitude: marker.latitude,
@@ -93,8 +114,11 @@ function Map() {
               }}
               title = { marker.name }
             >
-            <Callout tooltip>
-
+              {/* <Image source= {markerImg(marker.unisex)}/> */}
+            <Callout tooltip onPress={() => navigation.navigate('Details', {marker})}>
+              {/* <View>
+                <Text>{marker.name}</Text>
+              </View> */}
             </Callout>
             </MapView.Marker>
               ))
@@ -103,6 +127,18 @@ function Map() {
       </MapView>
   );
 }
+
+const styling = StyleSheet.create({
+  map: {
+    height: `50%`, 
+    width: `100%`,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    overflow: 'hidden',
+  }
+})
 
 export default Map;
 

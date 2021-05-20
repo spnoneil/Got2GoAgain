@@ -18,12 +18,12 @@ const NewBathroomForm = props => (
           onBlur={handleBlur('address')}
           value={values.address}
         />
-        <Text style={styling.text}>Free/Not Free:</Text>
+        <Text style={styling.text}>Notes:</Text>
         <TextInput
           style={styling.input}
-          onChangeText={handleChange('cost')}
-          onBlur={handleBlur('cost')}
-          value={values.cost}
+          onChangeText={handleChange('notes')}
+          onBlur={handleBlur('notes')}
+          value={values.notes}
         />
         <Text style={styling.text}>Rating:</Text>
         <TextInput
