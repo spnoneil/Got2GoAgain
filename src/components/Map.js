@@ -8,17 +8,19 @@ import axios from 'axios';
 import ApiHelper from './../api/ApiHelper';
 import { useNavigation } from '@react-navigation/native';
 import mapStyle from './../assets/googlemap'
+import { set } from 'react-native-reanimated';
 
 function Map() {
-  const [markers, setMarkers] = useState([])
+  const [markers, setMarkers] = useState(markers || [])
   const navigation = useNavigation();
   // const { data: marker, error, request: loadMarkers } = ApiHelper(getApiData)
   // console.log(markers)
   const location = useLocation();
   const reloadLocation = async (location) => {
     const resolvedLocation = await location;
+     setMarkers(resolvedLocation);
     return resolvedLocation;
-    // loadMarkers(resolvedLocation);
+
   }
   // console.log("reload: ", reloadLocation())
 // console.log(data)
@@ -47,7 +49,7 @@ function Map() {
     .then(response => {
     setMarkers(response);
   })
-  }, [location])
+  }, [])
   // useEffect(() => {
   //   setMarkers
   // })
@@ -64,6 +66,7 @@ function Map() {
         showsUserLocation
         region={region}
         onRegionChangeComplete={region => setRegion(region)}
+        // onRegionChangeComplete={markers => setMarkers(markers)}
         // initialRegion={initialRegion}
         // onPress={(location) => { 
         //   <Marker        
