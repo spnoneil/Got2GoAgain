@@ -6,7 +6,7 @@ import { Image, StyleSheet } from 'react-native'
 
 function HomeScreen({navigation}) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#387D9B' }}>
       <Image source={require('./../assets/logo.png')} style={styling.image} />
       <Text style={styling.textHeader}>"When you gotta, we got ya!"</Text>
       <Map />
